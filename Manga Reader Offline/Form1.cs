@@ -73,17 +73,20 @@ namespace Manga_Reader_Offline
                         Console.WriteLine("There is a directory and its path is " + directoryPaths[0].ToString());
                         filePaths = Directory.GetFiles(directoryPaths[currentChapter - 1].ToString());
 
-                        //If the first alphabet is not an image in the currently checked directory, check the next directory
-                        if (supportedFormats.Any(filePaths.Contains))
+                        //For every file in the folder, if there's no image file, proceed to check the next directory
+                        for (int j = 0; j < filePaths.Count(); j++)
                         {
-                            Console.WriteLine("Folder contains supported image formats!");
-                            imageFound = true;
-                            break; 
-                        }
-                        else
-                        {
-                            Console.WriteLine("Folder doesn't contains supported image formats!");
-                            currentChapter += 1;
+                            if (supportedFormats.Any(filePaths[j].Contains))
+                            {
+                                Console.WriteLine("Folder contains supported image formats!");
+                                imageFound = true;
+                                break;
+                            }
+                            else
+                            {
+                                Console.WriteLine("Folder doesn't contains supported image formats!");
+                                currentChapter += 1;
+                            }
                         }
                     }
                 }
