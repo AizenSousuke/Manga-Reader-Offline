@@ -171,6 +171,21 @@ namespace Manga_Reader_Offline
         }
 
         /// <summary>
+        /// Focus
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        public void PictureBox_MouseClick(object sender, MouseEventArgs e)
+        {
+            this.Focus();
+        }
+
+        public void PictureBox_MouseWheel(object sender, MouseEventArgs e)
+        {
+            Console.WriteLine("Mouse wheel scrolled");
+        }
+
+        /// <summary>
         /// Press the arrow keys to view the next or the previous image in the directory
         /// </summary>
         /// <param name="sender"></param>

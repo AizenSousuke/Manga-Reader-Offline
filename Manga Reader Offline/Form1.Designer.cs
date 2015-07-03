@@ -244,8 +244,10 @@
             // 
             // PictureBox
             // 
+            this.PictureBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.PictureBox.BackColor = System.Drawing.Color.Black;
-            this.PictureBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.PictureBox.Image = global::Manga_Reader_Offline.Properties.Resources.Tulips;
             this.PictureBox.Location = new System.Drawing.Point(0, 49);
             this.PictureBox.Name = "PictureBox";
@@ -253,6 +255,7 @@
             this.PictureBox.TabIndex = 2;
             this.PictureBox.TabStop = false;
             this.PictureBox.Paint += new System.Windows.Forms.PaintEventHandler(this.PictureBox_Paint);
+            this.PictureBox.MouseClick += new System.Windows.Forms.MouseEventHandler(this.PictureBox_MouseClick);
             this.PictureBox.MouseDown += new System.Windows.Forms.MouseEventHandler(this.PictureBox_MouseDown);
             this.PictureBox.MouseMove += new System.Windows.Forms.MouseEventHandler(this.PictureBox_MouseMove);
             this.PictureBox.MouseUp += new System.Windows.Forms.MouseEventHandler(this.PictureBox_MouseUp);
