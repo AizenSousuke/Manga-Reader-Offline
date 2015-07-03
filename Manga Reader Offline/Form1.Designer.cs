@@ -244,9 +244,7 @@
             // 
             // PictureBox
             // 
-            this.PictureBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.PictureBox.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.PictureBox.BackColor = System.Drawing.Color.Black;
             this.PictureBox.Image = global::Manga_Reader_Offline.Properties.Resources.Tulips;
             this.PictureBox.Location = new System.Drawing.Point(0, 49);

@@ -59,78 +59,83 @@ namespace Manga_Reader_Offline
             CurrentChapter.Text = "0";
             MaxChapter.Text = "0";
 
-            //Get the number of directories
-            directoryPaths = Directory.GetDirectories(folderDialog.SelectedPath);
-            currentChapter = 0;
-            maxChapter = directoryPaths.Count();
-
-            Console.WriteLine("Max chapter: " + maxChapter.ToString());
-            
-            //For every directory, check for images until it is found. If not, check the root directory for images
-            for (int i = 0; i <= maxChapter; i++)
+            //Make sure there's a path before proceeding
+            if (folderDialog.SelectedPath != "" && folderDialog.SelectedPath != null)
             {
-                if (imageFound == false)
+                //Get the number of directories
+                Console.WriteLine("Folderpath: " + folderDialog.SelectedPath.ToString());
+                directoryPaths = Directory.GetDirectories(folderDialog.SelectedPath);
+                currentChapter = 0;
+                maxChapter = directoryPaths.Count();
+
+                Console.WriteLine("Max chapter: " + maxChapter.ToString());
+
+                //For every directory, check for images until it is found. If not, check the root directory for images
+                for (int i = 0; i <= maxChapter; i++)
                 {
-                    //Get the files in the directory's folder if there's any. If not, just get the files in the current directory.
-                    if (maxChapter != 0 && i != maxChapter)
+                    if (imageFound == false)
                     {
-                        Console.WriteLine("There is a directory and its path is " + directoryPaths[i].ToString());
-                        Console.WriteLine("Found directories");
-                            filePaths = Directory.GetFiles(directoryPaths[i].ToString());
-                    }
-                    else
-                    {
-                        Console.WriteLine("Does not find directories");
-                        filePaths = Directory.GetFiles(folderDialog.SelectedPath);
-                    }
-
-                    //When the program is done checking the directories, check the root folder for images
-                    if (i == maxChapter)
-                    {
-                        Console.WriteLine("Directories have been checked for images but didn't find one. Checking root directory now...");
-                        filePaths = Directory.GetFiles(folderDialog.SelectedPath);
-                    }
-
-                    //For every file in the folder, if there's no image file, proceed to check the next directory
-                    Console.WriteLine("Filepath Count: " + filePaths.Count().ToString());
-                    for (int j = 0; j < filePaths.Count(); j++)
-                    {
-                        Console.WriteLine("File Checking: " + filePaths[j].ToString());
-
-                        if (supportedFormats.Any(filePaths[j].Contains))
+                        //Get the files in the directory's folder if there's any. If not, just get the files in the current directory.
+                        if (maxChapter != 0 && i != maxChapter)
                         {
-                            Console.WriteLine("File contain supported image formats!");
-                            imageFound = true;
-                            currentChapter += 1;
-                            break;
+                            Console.WriteLine("There is a directory and its path is " + directoryPaths[i].ToString());
+                            Console.WriteLine("Found directories");
+                            filePaths = Directory.GetFiles(directoryPaths[i].ToString());
                         }
                         else
                         {
-                            Console.WriteLine("File doesn't contain supported image formats!");
-                            currentChapter += 1;
+                            Console.WriteLine("Does not find directories");
+                            filePaths = Directory.GetFiles(folderDialog.SelectedPath);
+                        }
+
+                        //When the program is done checking the directories, check the root folder for images
+                        if (i == maxChapter)
+                        {
+                            Console.WriteLine("Directories have been checked for images but didn't find one. Checking root directory now...");
+                            filePaths = Directory.GetFiles(folderDialog.SelectedPath);
+                        }
+
+                        //For every file in the folder, if there's no image file, proceed to check the next directory
+                        Console.WriteLine("Filepath Count: " + filePaths.Count().ToString());
+                        for (int j = 0; j < filePaths.Count(); j++)
+                        {
+                            Console.WriteLine("File Checking: " + filePaths[j].ToString());
+
+                            if (supportedFormats.Any(filePaths[j].Contains))
+                            {
+                                Console.WriteLine("File contain supported image formats!");
+                                imageFound = true;
+                                currentChapter += 1;
+                                break;
+                            }
+                            else
+                            {
+                                Console.WriteLine("File doesn't contain supported image formats!");
+                                currentChapter += 1;
+                            }
                         }
                     }
                 }
-            }
 
-            //Toolstrip change
-            CurrentChapter.Text = "1";
-            MaxChapter.Text = maxChapter.ToString();
+                //Toolstrip change
+                CurrentChapter.Text = "1";
+                MaxChapter.Text = maxChapter.ToString();
 
-            //Set the first picture to load
-            currentPicture = 1;
-            maxPicture = filePaths.Count();
-            MaxPage.Text = maxPicture.ToString();
-            Console.WriteLine("Files found: " + filePaths.Length.ToString());
+                //Set the first picture to load
+                currentPicture = 1;
+                maxPicture = filePaths.Count();
+                MaxPage.Text = maxPicture.ToString();
+                Console.WriteLine("Files found: " + filePaths.Length.ToString());
 
-            //Load the first picture file in the directory. If no picture is found, show the background image
-            if (imageFound)
-            {
-                PictureBox.Load(filePaths[currentPicture - 1].ToString());
-            }
-            else
-            {
-                PictureBox.Image = null;
+                //Load the first picture file in the directory. If no picture is found, show the background image
+                if (imageFound)
+                {
+                    PictureBox.Load(filePaths[currentPicture - 1].ToString());
+                }
+                else
+                {
+                    PictureBox.Image = null;
+                }
             }
         }
 
