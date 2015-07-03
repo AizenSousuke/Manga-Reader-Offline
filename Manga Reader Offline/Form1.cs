@@ -34,9 +34,6 @@ namespace Manga_Reader_Offline
         public Form1()
         {
             InitializeComponent();
-
-            //Reset toolbar strip
-            MaxChapter.Text = "0";
             
         }
 
@@ -55,6 +52,13 @@ namespace Manga_Reader_Offline
             //Load the directory of the manga and take the lowest number folder and image first to view
             FolderBrowserDialog folderDialog = new FolderBrowserDialog();
             DialogResult folderDialogResult = folderDialog.ShowDialog();
+
+            //Reset image found
+            imageFound = false;
+
+            //Reset toolbar strip
+            CurrentChapter.Text = "0";
+            MaxChapter.Text = "0";
 
             //Get the number of directories
             directoryPaths = Directory.GetDirectories(folderDialog.SelectedPath);
@@ -117,10 +121,14 @@ namespace Manga_Reader_Offline
             MaxPage.Text = maxPicture.ToString();
             Console.WriteLine("Files found: " + filePaths.Length.ToString());
 
-            //Load the first picture file in the directory
+            //Load the first picture file in the directory. If no picture is found, show the background image
             if (imageFound)
             {
                 PictureBox.Load(filePaths[currentPicture - 1].ToString());
+            }
+            else
+            {
+                PictureBox.Image = null;
             }
         }
 
@@ -153,8 +161,11 @@ namespace Manga_Reader_Offline
 
         private void PictureBox_Paint(object sender, PaintEventArgs e)
         {
-            e.Graphics.Clear(Color.Black);
-            e.Graphics.DrawImage(PictureBox.Image, movingPoint);
+            if (PictureBox.Image != null)
+            {
+                e.Graphics.Clear(Color.Black);
+                e.Graphics.DrawImage(PictureBox.Image, movingPoint);
+            }
         }
 
         /// <summary>

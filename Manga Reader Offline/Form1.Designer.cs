@@ -229,9 +229,9 @@
             // 
             // PictureBox
             // 
-            this.PictureBox.BackColor = System.Drawing.SystemColors.Control;
+            this.PictureBox.BackColor = System.Drawing.Color.Black;
+            this.PictureBox.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("PictureBox.BackgroundImage")));
             this.PictureBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.PictureBox.Image = ((System.Drawing.Image)(resources.GetObject("PictureBox.Image")));
             this.PictureBox.Location = new System.Drawing.Point(0, 49);
             this.PictureBox.Name = "PictureBox";
             this.PictureBox.Size = new System.Drawing.Size(784, 513);
