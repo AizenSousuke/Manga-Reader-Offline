@@ -61,21 +61,26 @@ namespace Manga_Reader_Offline
             currentChapter = 1;
             maxChapter = directoryPaths.Count();
             MaxChapter.Text = maxChapter.ToString();
-            
+
+            Console.WriteLine("Max chapter: " + maxChapter.ToString());
+
             //Get the images to view
             if (directoryPaths.Count() > 1)
             {
                 //For every directory, check for images until it is found. If not, check the root directory for images
-                for (int i = 0; i < directoryPaths.Count(); i++)
+                for (int i = 0; i < maxChapter; i++)
                 {
                     if (imageFound == false)
                     {
-                        Console.WriteLine("There is a directory and its path is " + directoryPaths[0].ToString());
-                        filePaths = Directory.GetFiles(directoryPaths[currentChapter - 1].ToString());
+                        Console.WriteLine("There is a directory and its path is " + directoryPaths[i].ToString());
+                        filePaths = Directory.GetFiles(directoryPaths[i].ToString());
 
                         //For every file in the folder, if there's no image file, proceed to check the next directory
+                        Console.WriteLine("Filepath Count: " + filePaths.Count().ToString());
                         for (int j = 0; j < filePaths.Count(); j++)
                         {
+                            Console.WriteLine("File Checking: " + filePaths[j].ToString());
+
                             if (supportedFormats.Any(filePaths[j].Contains))
                             {
                                 Console.WriteLine("Folder contains supported image formats!");
