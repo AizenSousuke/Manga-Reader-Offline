@@ -66,15 +66,27 @@ namespace Manga_Reader_Offline
             Console.WriteLine("Max chapter: " + maxChapter.ToString());
 
             //Get the images to view
+            /*
             if (directoryPaths.Count() > 1)
             {
+            */
                 //For every directory, check for images until it is found. If not, check the root directory for images
                 for (int i = 0; i < maxChapter; i++)
                 {
                     if (imageFound == false)
                     {
                         Console.WriteLine("There is a directory and its path is " + directoryPaths[i].ToString());
-                        filePaths = Directory.GetFiles(directoryPaths[i].ToString());
+                        //Get the files in the directory's folder if there's any. If not, just get the files in the current directory.
+                        if (maxChapter != 0)
+                        {
+                            Console.WriteLine("Found directories");
+                            filePaths = Directory.GetFiles(directoryPaths[i].ToString());
+                        }
+                        else
+                        {
+                            Console.WriteLine("Does not find directories");
+                            filePaths = Directory.GetFiles(folderDialog.SelectedPath);
+                        }
 
                         //For every file in the folder, if there's no image file, proceed to check the next directory
                         Console.WriteLine("Filepath Count: " + filePaths.Count().ToString());
@@ -96,6 +108,7 @@ namespace Manga_Reader_Offline
                         }
                     }
                 }
+            /*
             }
             else
             {
@@ -108,14 +121,19 @@ namespace Manga_Reader_Offline
                 //Move to the next directory, if any, and see if there's any image file
                 filePaths = Directory.GetFiles(folderDialog.SelectedPath);
             }
+            */
 
+            //Set the first picture to load
             currentPicture = 1;
             maxPicture = filePaths.Count();
             MaxPage.Text = maxPicture.ToString();
-            //MessageBox.Show("Files found: " + filePaths.Length.ToString(), "Message");
+            Console.WriteLine("Files found: " + filePaths.Length.ToString());
 
-            //Load the first file in the directory
-            PictureBox.Load(filePaths[currentPicture - 1].ToString());
+            //Load the first picture file in the directory
+            if (imageFound)
+            {
+                PictureBox.Load(filePaths[currentPicture - 1].ToString());
+            }
         }
 
         /// <summary>
