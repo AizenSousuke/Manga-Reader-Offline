@@ -59,6 +59,7 @@ namespace Manga_Reader_Offline
             //Get the number of directories
             directoryPaths = Directory.GetDirectories(folderDialog.SelectedPath);
             currentChapter = 1;
+            CurrentChapter.Text = currentChapter.ToString();
             maxChapter = directoryPaths.Count();
             MaxChapter.Text = maxChapter.ToString();
 
@@ -83,13 +84,13 @@ namespace Manga_Reader_Offline
 
                             if (supportedFormats.Any(filePaths[j].Contains))
                             {
-                                Console.WriteLine("Folder contains supported image formats!");
+                                Console.WriteLine("File contain supported image formats!");
                                 imageFound = true;
                                 break;
                             }
                             else
                             {
-                                Console.WriteLine("Folder doesn't contains supported image formats!");
+                                Console.WriteLine("File doesn't contain supported image formats!");
                                 currentChapter += 1;
                             }
                         }
