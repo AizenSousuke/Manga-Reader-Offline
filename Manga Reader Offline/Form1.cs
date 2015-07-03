@@ -180,12 +180,13 @@ namespace Manga_Reader_Offline
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        public void PictureBox_MouseClick(object sender, MouseEventArgs e)
+        public void Panel_MouseClick(object sender, MouseEventArgs e)
         {
             this.Focus();
+            Console.WriteLine("Picturebox Focus!");
         }
 
-        public void PictureBox_MouseWheel(object sender, MouseEventArgs e)
+        public void Panel_MouseWheel(object sender, MouseEventArgs e)
         {
             Console.WriteLine("Mouse wheel scrolled");
         }

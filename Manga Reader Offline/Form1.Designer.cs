@@ -244,16 +244,15 @@
             // 
             // PictureBox
             // 
-            this.PictureBox.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.PictureBox.BackColor = System.Drawing.Color.Black;
+            this.PictureBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.PictureBox.Image = global::Manga_Reader_Offline.Properties.Resources.Tulips;
             this.PictureBox.Location = new System.Drawing.Point(0, 49);
             this.PictureBox.Name = "PictureBox";
-            this.PictureBox.Size = new System.Drawing.Size(784, 513);
+            this.PictureBox.Size = new System.Drawing.Size(784, 491);
             this.PictureBox.TabIndex = 2;
             this.PictureBox.TabStop = false;
             this.PictureBox.Paint += new System.Windows.Forms.PaintEventHandler(this.PictureBox_Paint);
-            this.PictureBox.MouseClick += new System.Windows.Forms.MouseEventHandler(this.PictureBox_MouseClick);
             this.PictureBox.MouseDown += new System.Windows.Forms.MouseEventHandler(this.PictureBox_MouseDown);
             this.PictureBox.MouseMove += new System.Windows.Forms.MouseEventHandler(this.PictureBox_MouseMove);
             this.PictureBox.MouseUp += new System.Windows.Forms.MouseEventHandler(this.PictureBox_MouseUp);
@@ -263,8 +262,8 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(784, 562);
-            this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.PictureBox);
+            this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
