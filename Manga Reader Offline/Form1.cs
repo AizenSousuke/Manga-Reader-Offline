@@ -34,7 +34,6 @@ namespace Manga_Reader_Offline
         public Form1()
         {
             InitializeComponent();
-            
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -62,10 +61,8 @@ namespace Manga_Reader_Offline
 
             //Get the number of directories
             directoryPaths = Directory.GetDirectories(folderDialog.SelectedPath);
-            currentChapter = 1;
-            CurrentChapter.Text = currentChapter.ToString();
+            currentChapter = 0;
             maxChapter = directoryPaths.Count();
-            MaxChapter.Text = maxChapter.ToString();
 
             Console.WriteLine("Max chapter: " + maxChapter.ToString());
             
@@ -104,6 +101,7 @@ namespace Manga_Reader_Offline
                         {
                             Console.WriteLine("File contain supported image formats!");
                             imageFound = true;
+                            currentChapter += 1;
                             break;
                         }
                         else
@@ -114,6 +112,10 @@ namespace Manga_Reader_Offline
                     }
                 }
             }
+
+            //Toolstrip change
+            CurrentChapter.Text = "1";
+            MaxChapter.Text = maxChapter.ToString();
 
             //Set the first picture to load
             currentPicture = 1;

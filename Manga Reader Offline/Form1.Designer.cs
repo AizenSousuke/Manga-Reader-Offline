@@ -212,7 +212,6 @@
             // 
             this.CurrentPage.Name = "CurrentPage";
             this.CurrentPage.Size = new System.Drawing.Size(30, 25);
-            this.CurrentPage.Text = "1";
             // 
             // toolStripLabel4
             // 
