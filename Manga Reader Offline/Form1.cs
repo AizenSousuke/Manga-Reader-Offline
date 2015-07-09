@@ -75,6 +75,8 @@ namespace Manga_Reader_Offline
             //Reset toolbar strip
             CurrentChapter.Text = "0";
             MaxChapter.Text = "0";
+            CurrentPage.Text = "0";
+            MaxPage.Text = "0";
 
             //Make sure there's a path before proceeding
             if (folderDialog.SelectedPath != "" && folderDialog.SelectedPath != null)
