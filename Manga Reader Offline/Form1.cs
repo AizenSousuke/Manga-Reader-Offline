@@ -273,6 +273,9 @@ namespace Manga_Reader_Offline
             //Right
             if (e.KeyCode == Keys.Right)
             {
+                //Get the max picture first
+                maxPicture = chaptersArray[currentChapter - 1].Count();
+
                 if (currentPicture < maxPicture)
                 {
                     currentPicture += 1;
@@ -299,9 +302,13 @@ namespace Manga_Reader_Offline
                     PictureBox.Load(chaptersArray[currentChapter - 1][currentPicture - 1].ToString());
                 }
             }
+
             //Left
             if (e.KeyCode == Keys.Left)
             {
+                //Get the max picture first
+                maxPicture = chaptersArray[currentChapter - 1].Count();
+
                 if (currentPicture > 1)
                 {
                     currentPicture -= 1;
