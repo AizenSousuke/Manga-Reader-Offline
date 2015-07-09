@@ -26,10 +26,15 @@ namespace Manga_Reader_Offline
         Point movingPoint = Point.Empty;
         float zoom = 100;
 
+        //Formats which are supported
         string[] supportedFormats = { ".jpg", ".png" };
 
+        //All the directories that should be checked
         string[] directoryPaths;
+        //All the paths of the files in the directory
         string[] filePaths;
+        //Images which are stored in memory to be loaded so that the program only load the images
+        List<String> imagesArray;
 
         public Form1()
         {
@@ -55,6 +60,18 @@ namespace Manga_Reader_Offline
             //Reset image found
             imageFound = false;
 
+            //Clear the images array list if there is one. If not, create a new list
+            if (imagesArray == null)
+            {
+                imagesArray = new List<string>();
+                Console.WriteLine("Creating new Images Array");
+            }
+            else
+            {
+                imagesArray.Clear();
+                Console.WriteLine("Clearing Images Array");
+            }
+
             //Reset toolbar strip
             CurrentChapter.Text = "0";
             MaxChapter.Text = "0";
@@ -68,11 +85,12 @@ namespace Manga_Reader_Offline
                 currentChapter = 0;
                 maxChapter = directoryPaths.Count();
 
-                Console.WriteLine("Max chapter: " + maxChapter.ToString());
+                Console.WriteLine("Max chapter before checking for images: " + maxChapter.ToString());
 
                 //For every directory, check for images until it is found. If not, check the root directory for images
                 for (int i = 0; i <= maxChapter; i++)
                 {
+                    //The program will only check till the first image is found
                     if (imageFound == false)
                     {
                         //Get the files in the directory's folder if there's any. If not, just get the files in the current directory.
@@ -104,9 +122,11 @@ namespace Manga_Reader_Offline
                             if (supportedFormats.Any(filePaths[j].Contains))
                             {
                                 Console.WriteLine("File contain supported image formats!");
-                                imageFound = true;
+                                //imageFound = true;
+                                //Put the image in the imagesArray
+                                imagesArray.Add(filePaths[j]);
                                 currentChapter += 1;
-                                break;
+                                //break;
                             }
                             else
                             {
@@ -117,20 +137,29 @@ namespace Manga_Reader_Offline
                     }
                 }
 
+                //Load all the images from the first directory with images
+                imageFound = true;      //Moved from the top so that the program checks for all the images
+
                 //Toolstrip change
                 CurrentChapter.Text = "1";
                 MaxChapter.Text = maxChapter.ToString();
 
                 //Set the first picture to load
                 currentPicture = 1;
-                maxPicture = filePaths.Count();
+                CurrentPage.Text = currentPicture.ToString();
+                //maxPicture = filePaths.Count();
+                maxPicture = imagesArray.Count();
+                Console.WriteLine("Images found: " + imagesArray.Count().ToString());
                 MaxPage.Text = maxPicture.ToString();
                 Console.WriteLine("Files found: " + filePaths.Length.ToString());
 
                 //Load the first picture file in the directory. If no picture is found, show the background image
                 if (imageFound)
                 {
-                    PictureBox.Load(filePaths[currentPicture - 1].ToString());
+                    //PictureBox.Load(filePaths[currentPicture - 1].ToString());
+
+                    //Load the image from the imagesArray
+                    PictureBox.Load(imagesArray[currentPicture - 1].ToString());
                 }
                 else
                 {
@@ -212,10 +241,10 @@ namespace Manga_Reader_Offline
                 CurrentPage.Text = currentPicture.ToString();
 
                 //Check if object is an image before loading
-                string file = filePaths[currentPicture - 1].ToString();
+                string file = imagesArray[currentPicture - 1].ToString();
                 if (supportedFormats.Any(file.Contains))
                 {
-                    PictureBox.Load(filePaths[currentPicture - 1].ToString());
+                    PictureBox.Load(imagesArray[currentPicture - 1].ToString());
                 }
             }
             //Left
@@ -232,10 +261,10 @@ namespace Manga_Reader_Offline
                 CurrentPage.Text = currentPicture.ToString();
 
                 //Check if object is an image before loading
-                string file = filePaths[currentPicture - 1].ToString();
+                string file = imagesArray[currentPicture - 1].ToString();
                 if (supportedFormats.Any(file.Contains))
                 {
-                    PictureBox.Load(filePaths[currentPicture - 1].ToString());
+                    PictureBox.Load(imagesArray[currentPicture - 1].ToString());
                 }
             }
         }
