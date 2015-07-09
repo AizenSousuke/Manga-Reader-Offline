@@ -286,6 +286,7 @@ namespace Manga_Reader_Offline
                     }
                 }
 
+                Console.WriteLine("Current Picture: " + currentPicture.ToString());
                 Console.WriteLine("Current Chapter: " + currentChapter.ToString());
                 CurrentPage.Text = currentPicture.ToString();
                 MaxPage.Text = chaptersArray[currentChapter - 1].Count().ToString();
@@ -314,6 +315,7 @@ namespace Manga_Reader_Offline
                     }
                 }
 
+                Console.WriteLine("Current Picture: " + currentPicture.ToString());
                 Console.WriteLine("Current Chapter: " + currentChapter.ToString());
                 CurrentPage.Text = currentPicture.ToString();
                 MaxPage.Text = chaptersArray[currentChapter - 1].Count().ToString();
