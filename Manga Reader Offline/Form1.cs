@@ -62,6 +62,9 @@ namespace Manga_Reader_Offline
             //Reset image found
             imageFound = false;
 
+            //Reset Status Label
+            StatusLabel.Text = "";
+
             //Clear the images array list if there is one. If not, create a new list
             if (imagesArray == null)
             {
@@ -155,6 +158,9 @@ namespace Manga_Reader_Offline
                     //After checking every folder, if there are images, consolidate them as a chapter. If not, clear the list and check the next folder, if any.
                     if (imagesArray.Count() > 0)
                     {
+                        //If image is found, set it to true so that the program doesn't error out later
+                        imageFound = true;
+
                         //Add chapter
                         chaptersArray.Add(imagesArray);
                         currentChapter += 1;
@@ -171,9 +177,6 @@ namespace Manga_Reader_Offline
                 Console.WriteLine("Max Chapter after searching: " + currentChapter.ToString());
                 maxChapter = currentChapter;
 
-                //Load all the images from the first directory with images
-                imageFound = true;      //Moved from the top so that the program checks for all the images
-
                 //Toolstrip change
                 currentChapter = 1;
                 CurrentChapter.Text = "1";
@@ -182,7 +185,10 @@ namespace Manga_Reader_Offline
                 //Set the first picture to load
                 currentPicture = 1;
                 CurrentPage.Text = currentPicture.ToString();
-                maxPicture = chaptersArray[currentChapter - 1].Count();
+                if (imageFound)
+                {
+                    maxPicture = chaptersArray[currentChapter - 1].Count();
+                }
                 MaxPage.Text = maxPicture.ToString();
                 /*
                 //maxPicture = filePaths.Count();
@@ -203,12 +209,21 @@ namespace Manga_Reader_Offline
                     //Load the image from the imagesArray in the chaptersArray according to which chapter is currently being viewed.
                     Console.WriteLine("Chapters Array at [0]: " + chaptersArray[0].Count().ToString());
                     PictureBox.Load(chaptersArray[currentChapter - 1][currentPicture - 1].ToString());
+
+                    //Update the Status Label
+                    StatusLabelUpdate();
                 }
                 else
                 {
                     PictureBox.Image = null;
                 }
             }
+        }
+
+        //Satus Label Update
+        private void StatusLabelUpdate()
+        {
+            StatusLabel.Text = chaptersArray[currentChapter - 1][currentPicture - 1].ToString();
         }
 
         /// <summary>
@@ -271,7 +286,7 @@ namespace Manga_Reader_Offline
         private void Form1_OnKeyDown(object sender, KeyEventArgs e)
         {
             //Right
-            if (e.KeyCode == Keys.Right)
+            if (e.KeyCode == Keys.Right && imageFound)
             {
                 //Check if the picture is the last one in the current chapter
                 if (currentPicture < maxPicture)
@@ -300,11 +315,13 @@ namespace Manga_Reader_Offline
                 if (supportedFormats.Any(file.Contains))
                 {
                     PictureBox.Load(chaptersArray[currentChapter - 1][currentPicture - 1].ToString());
+                    //Update the Status Label
+                    StatusLabelUpdate();
                 }
             }
 
             //Left
-            if (e.KeyCode == Keys.Left)
+            if (e.KeyCode == Keys.Left && imageFound)
             {
                 //Check if the picture is the first one in the current chapter
                 if (currentPicture > 1)
@@ -333,6 +350,8 @@ namespace Manga_Reader_Offline
                 if (supportedFormats.Any(file.Contains))
                 {
                     PictureBox.Load(chaptersArray[currentChapter - 1][currentPicture - 1].ToString());
+                    //Update the Status Label
+                    StatusLabelUpdate();
                 }
             }
         }
