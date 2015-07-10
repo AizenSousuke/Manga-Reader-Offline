@@ -273,18 +273,18 @@ namespace Manga_Reader_Offline
             //Right
             if (e.KeyCode == Keys.Right)
             {
-                //Get the max picture first
-                maxPicture = chaptersArray[currentChapter - 1].Count();
-
+                //Check if the picture is the last one in the current chapter
                 if (currentPicture < maxPicture)
                 {
                     currentPicture += 1;
                 }
                 else
                 {
-                    currentPicture = 1;
                     if (currentChapter < maxChapter)
                     {
+                        //Get the max picture of the next chapter
+                        maxPicture = chaptersArray[currentChapter].Count();
+                        currentPicture = 1;
                         currentChapter += 1;
                     }
                 }
@@ -306,18 +306,18 @@ namespace Manga_Reader_Offline
             //Left
             if (e.KeyCode == Keys.Left)
             {
-                //Get the max picture first
-                maxPicture = chaptersArray[currentChapter - 1].Count();
-
+                //Check if the picture is the first one in the current chapter
                 if (currentPicture > 1)
                 {
                     currentPicture -= 1;
                 }
                 else
                 {
-                    currentPicture = maxPicture;
                     if (currentChapter > 1)
                     {
+                        //Get the max picture of the last chapter
+                        maxPicture = chaptersArray[currentChapter - 2].Count();
+                        currentPicture = maxPicture;
                         currentChapter -= 1;
                     }
                 }
